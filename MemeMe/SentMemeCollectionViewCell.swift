@@ -9,5 +9,8 @@
 import UIKit
 
 class SentMemeCollectionViewCell: UICollectionViewCell {
+    @IBOutlet weak var topLabel: UILabel!
     
+    @IBOutlet weak var bottomLabel: UILabel!
+    @IBOutlet weak var memeImage: UIImageView!
 }

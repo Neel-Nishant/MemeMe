@@ -8,28 +8,63 @@
 
 import UIKit
 
-class SentMemesTableViewController: UIViewController {
-
+var memes: [Meme]!
+class SentMemesTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+        tView.dataSource = self
+        tView.delegate = self
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+         tView.dataSource = self
+        tView.delegate = self
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        memes = appDelegate.memes
+        tView.reloadData()
+        print("Memes: \(memes)")
+        
+    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(true)
+//
+//
+//
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        if let coun = memes {
+            print("here1 \(memes.count)")
+            return memes.count
+            
+        }
+        else {
+            return 0
+        }
     }
-    */
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tView.dequeueReusableCell(withIdentifier: "SentMemeTableCell") as! SentMemeTableViewCell
+        let meme = memes[indexPath.row]
+        cell.titleLabel.text = meme.topText
+//        cell.textLabel?.text = meme.topText
+        print("UIImage\(meme.originalImage)")
+        cell.img.image = UIImage(named: "\(meme.originalImage)")
+//        cell.imageView?.image = UIImage(named: "\(meme.originalImage)")
+        return cell
+    }
 
 }
