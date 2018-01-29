@@ -1,6 +1,6 @@
 //
-//  ViewController.swift
-//  Memev1.0
+//  CreateMemeViewController.swift
+//  MemeMe
 //
 //  Created by Neel Nishant on 22/12/17.
 //  Copyright © 2017 Neel Nishant. All rights reserved.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class CreateMemeViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
 
     let memeTextAttributes:[String:Any] = [
         NSAttributedStringKey.strokeColor.rawValue: UIColor.black,
@@ -43,7 +43,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
         
-        cancelBtn.isEnabled = false
+        cancelBtn.isEnabled = true
         
     }
     
@@ -179,15 +179,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
             (activity, success, items, error) in
             if(success && error == nil){
                 //Do Work
+                
+                    if (success) {
+                        self.save()
+                    }
                 self.dismiss(animated: true, completion: nil);
             }
             else if (error != nil){
                 //log the error
+                print(error.debugDescription)
             }
         }
-        present(activityController, animated: true) {
-            self.save()
-        }
+        present(activityController, animated: true)
+       
        
         
     }
@@ -195,6 +199,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         topTextField.text = "TOP"
         bottomTextField.text = "BOTTOM"
         selectedImage.image = nil
+            dismiss(animated: true, completion: nil)
     }
 }
 

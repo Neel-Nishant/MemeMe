@@ -2,7 +2,7 @@
 //  SentMemeTableViewCell.swift
 //  MemeMe
 //
-//  Created by Neel Nishant on 27/12/17.
+//  Created by Neel Nishant on 28/12/17.
 //  Copyright © 2017 Neel Nishant. All rights reserved.
 //
 
@@ -10,7 +10,7 @@ import UIKit
 
 class SentMemeTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var label: UILabel!
     @IBOutlet weak var img: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
